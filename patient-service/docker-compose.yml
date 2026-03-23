@@ -1,0 +1,32 @@
+version: "3.8"
+
+services:
+  db:
+    image: postgres
+
+    container_name: patient-service-db
+    environment:
+      POSTGRES_DB: db
+      POSTGRES_USER: admin_user
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5000:5432"
+    volumes:
+      - D:\JAVA_FULL_STACK_PROJECTS\Patient-Service-DB-Volume:/var/lib/postgresql 
+
+
+  app:
+    build: .
+    container_name: patient-service-app
+    ports:
+      - "4000:4000"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://patient-service-db:5432/db
+      SPRING_DATASOURCE_USERNAME: admin_user
+      SPRING_DATASOURCE_PASSWORD: postgres
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+      SPRING_SQL_INT_MODE: always
+    volumes:
+      - .:/app
+    depends_on:
+      - db

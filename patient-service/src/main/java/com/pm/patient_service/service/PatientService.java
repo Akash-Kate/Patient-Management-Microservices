@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.UUID;
 
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.DeleteMapping;
 
 import com.pm.patient_service.dto.PatientRequestDTO;
 import com.pm.patient_service.dto.PatientResponseDTO;
@@ -74,8 +75,12 @@ public class PatientService {
 		
 
 	}
-
 	
+	
+	public void deletePatient(UUID id)
+	{
+		patientRepo.deleteById(id);
+	}
 
 }
 
