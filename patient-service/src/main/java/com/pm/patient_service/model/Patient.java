@@ -32,10 +32,10 @@ public class Patient {
 	private String address;
 	
 	@NotNull
-	private LocalDate dateofBirth;
+	private LocalDate dateOfBirth;
 	
 	@NotNull
-	private LocalDate registerDate;
+	private LocalDate registeredDate;
 
 	public UUID getId() {
 		return id;
@@ -69,20 +69,20 @@ public class Patient {
 		this.address = address;
 	}
 
-	public LocalDate getDateofBirth() {
-		return dateofBirth;
+	public LocalDate getdateOfBirth() {
+		return dateOfBirth;
 	}
 
-	public void setDateofBirth(LocalDate dateofBirth) {
-		this.dateofBirth = dateofBirth;
+	public void setdateOfBirth(LocalDate dateOfBirth) {
+		this.dateOfBirth = dateOfBirth;
 	}
 
-	public LocalDate getRegisterDate() {
-		return registerDate;
+	public LocalDate getRegisteredDate() {
+		return registeredDate;
 	}
 
-	public void setRegisterDate(LocalDate registerDate) {
-		this.registerDate = registerDate;
+	public void setRegisteredDate(LocalDate registeredDate) {
+		this.registeredDate = registeredDate;
 	}
 	
 	

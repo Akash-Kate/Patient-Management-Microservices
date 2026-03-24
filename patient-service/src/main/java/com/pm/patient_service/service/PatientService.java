@@ -11,6 +11,7 @@ import com.pm.patient_service.dto.PatientRequestDTO;
 import com.pm.patient_service.dto.PatientResponseDTO;
 import com.pm.patient_service.exception.EmailAlreadyExistsException;
 import com.pm.patient_service.exception.PatientNotFoundException;
+import com.pm.patient_service.grpc.BillingServiceGrpcClient;
 import com.pm.patient_service.mapper.PatientMapper;
 import com.pm.patient_service.model.Patient;
 import com.pm.patient_service.repository.PatientRepository;
@@ -19,10 +20,14 @@ import com.pm.patient_service.repository.PatientRepository;
 public class PatientService {
 
 	private PatientRepository patientRepo;
+	private final BillingServiceGrpcClient billingServiceGrpcClient;
 
-	public PatientService(PatientRepository patientRepo) {
+	
+
+	public PatientService(PatientRepository patientRepo, BillingServiceGrpcClient billingServiceGrpcClient) {
 		super();
 		this.patientRepo = patientRepo;
+		this.billingServiceGrpcClient = billingServiceGrpcClient;
 	}
 
 	public List<PatientResponseDTO> getPatients() {
@@ -45,6 +50,9 @@ public class PatientService {
 
 		Patient newPatient = patientRepo.save(PatientMapper.toModel(patientRequestDTO));
 
+		billingServiceGrpcClient.createBillingAccount(newPatient.getId().toString(), newPatient.getName(), newPatient.getEmail());
+		
+		
 		return PatientMapper.toDto(newPatient);
 
 	}
@@ -66,7 +74,7 @@ public class PatientService {
 		patient.setName(patientRequestDTO.getName());
 		patient.setAddress(patientRequestDTO.getAddress());
 		patient.setEmail(patientRequestDTO.getEmail());
-		patient.setDateofBirth(LocalDate.parse(patientRequestDTO.getDateOfBirth()));
+		patient.setdateOfBirth(LocalDate.parse(patientRequestDTO.getDateOfBirth()));
 		
 		
 		Patient updatedPatient = patientRepo.save(patient);

@@ -11,6 +11,8 @@ services:
       POSTGRES_PASSWORD: postgres
     ports:
       - "5000:5432"
+    networks:
+      - internal
     volumes:
       - D:\JAVA_FULL_STACK_PROJECTS\Patient-Service-DB-Volume:/var/lib/postgresql 
 
@@ -20,13 +22,20 @@ services:
     container_name: patient-service-app
     ports:
       - "4000:4000"
+    networks:
+      - internal
     environment:
       SPRING_DATASOURCE_URL: jdbc:postgresql://patient-service-db:5432/db
       SPRING_DATASOURCE_USERNAME: admin_user
       SPRING_DATASOURCE_PASSWORD: postgres
-      SPRING_JPA_HIBERNATE_DDL_AUTO: update
-      SPRING_SQL_INT_MODE: always
+      SPRING_JPA_HIBERNATE_DDL_AUTO: none
+      SPRING_SQL_INIT_MODE: always
+      Billing_Service_Address: billing-service-app
+      BILLING_SERVICE_GRPC_PORT: 9001
     volumes:
       - .:/app
     depends_on:
       - db
+networks:
+  internal:
+    external: true
