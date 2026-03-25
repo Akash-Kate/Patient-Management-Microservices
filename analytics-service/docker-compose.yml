@@ -1,0 +1,20 @@
+version: "3.8"
+
+services:
+ 
+  app:
+    build: .
+    image: analytics-service-app
+    container_name: analytics-service-app
+    ports:
+      - "4002:4002"
+    networks:
+      - internal
+    environment:
+      SPRING_KAFKA_BOOTSTRAP_SERVERS: kafka:9092
+    volumes:
+      - .:/app
+
+networks:
+  internal:
+    external: true

@@ -20,8 +20,6 @@ services:
   app:
     build: .
     container_name: patient-service-app
-    ports:
-      - "4000:4000"
     networks:
       - internal
     environment:
@@ -32,6 +30,7 @@ services:
       SPRING_SQL_INIT_MODE: always
       Billing_Service_Address: billing-service-app
       BILLING_SERVICE_GRPC_PORT: 9001
+      SPRING_KAFKA_BOOTSTRAP_SERVERS: kafka:9092
     volumes:
       - .:/app
     depends_on:
