@@ -7,6 +7,16 @@ spring:
       server:
         webflux:
           routes:
+            ## http://localhost:4004/auth/login
+            ## Will be passed to http://auth-service-app:4005
+            ## As predicates matched
+            - id: auth-service-route
+              uri: http://auth-service-app:4005
+              predicates:
+                - Path=/auth/**
+              filters:
+                - StripPrefix=1
+
             - id: patient-service-route
               uri: http://patient-service-app:4000
               predicates:

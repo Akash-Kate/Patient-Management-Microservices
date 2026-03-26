@@ -14,14 +14,11 @@ services:
     networks:
       - internal
     volumes:
-      - D:\JAVA_FULL_STACK_PROJECTS\Auth-Service-DB-Volume:/var/lib/postgresql 
-
+      - E:\JAVA_FULL_STACK_PROJECTS\Auth-Service-DB-Volume:/var/lib/postgresql 
 
   app:
     build: .
     container_name: auth-service-app
-    ports:
-      - "4005:4005"
     networks:
       - internal
     environment:
@@ -30,6 +27,7 @@ services:
       SPRING_DATASOURCE_PASSWORD: postgres
       SPRING_JPA_HIBERNATE_DDL_AUTO: none
       SPRING_SQL_INIT_MODE: always
+
 
     volumes:
       - .:/app
