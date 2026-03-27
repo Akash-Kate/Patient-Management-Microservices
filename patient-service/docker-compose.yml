@@ -14,7 +14,7 @@ services:
     networks:
       - internal
     volumes:
-      - E:\JAVA_FULL_STACK_PROJECTS\Patient-Service-DB-Volume:/var/lib/postgresql 
+      - D:\JAVA_FULL_STACK_PROJECTS\Patient-Service-DB-Volume:/var/lib/postgresql 
 
 
   app:

@@ -11,7 +11,7 @@ spring:
             ## Will be passed to http://auth-service-app:4005
             ## As predicates matched
             - id: auth-service-route
-              uri: http://auth-service-app:4005
+              uri: http://auth-service-app:4005l
               predicates:
                 - Path=/auth/**
               filters:
@@ -23,3 +23,4 @@ spring:
                 - Path=/api/patients/**
               filters:
                 - StripPrefix=1
+                - JwtValidation  ## JwtValidationGatewayFilterFactory , follow naming convention
